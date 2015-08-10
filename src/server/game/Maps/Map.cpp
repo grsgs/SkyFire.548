@@ -859,8 +859,8 @@ void Map::PlayerRelocation(Player* player, float x, float y, float z, float orie
     {
         TC_LOG_DEBUG("maps", "Player %s relocation grid[%u, %u]cell[%u, %u]->grid[%u, %u]cell[%u, %u]", player->GetName().c_str(), old_cell.GridX(), old_cell.GridY(), old_cell.CellX(), old_cell.CellY(), new_cell.GridX(), new_cell.GridY(), new_cell.CellX(), new_cell.CellY());
 
-        player->RemoveFromGrid();
-
+        if (player->IsInGrid())
+            player->RemoveFromGrid();
         if (old_cell.DiffGrid(new_cell))
             EnsureGridLoadedForActiveObject(new_cell, player);
 
